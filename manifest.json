@@ -1,0 +1,69 @@
+{
+  "manifest_version": 3,
+  "name": "Outlook Auto-Login & OTP Notifier",
+  "version": "1.0.0",
+  "description": "Tự động đăng nhập Outlook, theo dõi hòm thư và bóc tách mã xác thực OTP với thông báo tức thì.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "notifications",
+    "cookies",
+    "browsingData",
+    "scripting",
+    "clipboardWrite"
+  ],
+  "host_permissions": [
+    "https://*.live.com/*",
+    "https://*.microsoftonline.com/*",
+    "https://*.office.com/*",
+    "https://*.office365.com/*",
+    "<all_urls>"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon16.png",
+      "48": "icon48.png",
+      "128": "icon128.png"
+    },
+    "default_title": "Outlook Auto-Login & OTP Notifier"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://login.live.com/*",
+        "https://login.microsoftonline.com/*"
+      ],
+      "js": ["content_ms_login.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "https://outlook.live.com/*",
+        "https://outlook.office.com/*",
+        "https://outlook.office365.com/*"
+      ],
+      "js": ["content_outlook_otp.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    },
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["content_toast_ui.js"],
+      "run_at": "document_idle",
+      "all_frames": false
+    }
+  ],
+  "icons": {
+    "16": "icon16.png",
+    "48": "icon48.png",
+    "128": "icon128.png"
+  }
+}
+

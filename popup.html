@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outlook Auto-Login & OTP Notifier</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-title-wrap">
+        <img src="icon48.png" alt="Logo" class="logo-icon">
+        <div>
+          <h1 class="title">Outlook OTP Notifier</h1>
+          <p class="subtitle">Auto-Login & Fast OTP Grabber</p>
+        </div>
+      </div>
+      <span class="badge-v3">MV3</span>
+    </header>
+
+    <!-- Quick Paste Zone -->
+    <section class="section quick-paste-section">
+      <label for="quickPaste" class="field-label">
+        <span>⚡ Quick Paste</span>
+        <span class="hint-text">(email|pass, email:pass, tab)</span>
+      </label>
+      <div class="input-wrapper">
+        <input 
+          type="text" 
+          id="quickPaste" 
+          placeholder="user@hotmail.com|MậtKhẩu123" 
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button id="btnQuickClear" class="btn-icon" title="Xóa nhanh">✕</button>
+      </div>
+    </section>
+
+    <!-- Form Fields -->
+    <section class="section form-section">
+      <div class="form-group">
+        <label for="emailInput" class="field-label">Email Outlook / Hotmail</label>
+        <div class="input-wrapper">
+          <input 
+            type="email" 
+            id="emailInput" 
+            placeholder="example@outlook.com" 
+            autocomplete="off"
+            spellcheck="false"
+          >
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="passwordInput" class="field-label">Mật khẩu</label>
+        <div class="input-wrapper">
+          <input 
+            type="password" 
+            id="passwordInput" 
+            placeholder="••••••••••••" 
+            autocomplete="off"
+          >
+          <button id="btnTogglePassword" class="btn-icon" title="Hiện/Ẩn mật khẩu">👁️</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Options -->
+    <section class="section options-section">
+      <label class="checkbox-container">
+        <input type="checkbox" id="chkClearCookies" checked>
+        <span class="checkmark"></span>
+        <span class="checkbox-label">Xóa Cookie tài khoản cũ trước khi đăng nhập</span>
+      </label>
+      <label class="checkbox-container">
+        <input type="checkbox" id="chkAutoCloseTab" checked>
+        <span class="checkmark"></span>
+        <span class="checkbox-label">Tự đóng tab Outlook sau khi lấy được OTP</span>
+      </label>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="section actions-section">
+      <button id="btnStart" class="btn btn-primary">
+        <span class="btn-icon-text">🚀</span>
+        <span id="btnStartText">Đăng nhập & Lấy OTP</span>
+      </button>
+      <button id="btnStop" class="btn btn-danger hidden">
+        <span>⏹</span>
+        <span>Hủy tiến trình</span>
+      </button>
+    </section>
+
+    <!-- Live Status Box -->
+    <section class="section status-section">
+      <div class="status-card" id="statusCard">
+        <div class="status-indicator-wrap">
+          <span class="status-dot" id="statusDot"></span>
+          <span class="status-title" id="statusTitle">Trạng thái:</span>
+        </div>
+        <p class="status-message" id="statusMessage">Sẵn sàng chờ lệnh.</p>
+      </div>
+    </section>
+
+    <!-- Latest OTP Display -->
+    <section class="section otp-section" id="otpSection">
+      <div class="otp-card">
+        <div class="otp-card-header">
+          <span class="otp-badge">MÃ OTP MỚI NHẤT</span>
+          <span class="otp-time" id="otpTime">--:--:--</span>
+        </div>
+        <div class="otp-code-container" id="otpDisplayContainer" title="Bấm để sao chép">
+          <div class="otp-code-text" id="otpCode">------</div>
+          <button id="btnCopyOtp" class="btn-copy">Sao chép</button>
+        </div>
+        <div class="otp-details" id="otpDetails">
+          <div class="otp-subject" id="otpSubject">Chưa có mã nào</div>
+          <div class="otp-sender" id="otpSender"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- History Collapsible / Summary -->
+    <section class="section history-section">
+      <div class="history-header" id="historyHeader">
+        <span>📜 Lịch sử OTP gần đây</span>
+        <button id="btnClearHistory" class="btn-link" title="Xóa lịch sử">Xóa</button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="empty-history">Chưa có lịch sử mã OTP</div>
+      </div>
+    </section>
+
+    <!-- Toast Notification in popup for copy action -->
+    <div id="popupToast" class="popup-toast hidden">Đã copy vào bộ nhớ tạm!</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+
